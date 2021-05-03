@@ -46,7 +46,7 @@ public class HigherOrderFunctionsLearningTest {
     @Test
     public void testMap() {
         Stream<Integer> input = Stream.of(1, 2, 3);
-        List<Integer> actual = null; // TODO: Replace the `actual` with your solution, here and in all the following.
+        List<Integer> actual = input.map(x -> x+1).collect(Collectors.toList());
         List<Integer> expected = List.of(2, 3, 4);
         Assertions.assertIterableEquals(expected, actual);
     }
@@ -57,7 +57,7 @@ public class HigherOrderFunctionsLearningTest {
     @Test
     public void testFilter() {
         Stream<String> input = Stream.of("a1", "a2", "a3", "b1", "b2", "b3");
-        List<String> actual = null;
+        List<String> actual = input.filter(s -> s.startsWith("b")).collect(Collectors.toList());
         List<String> expected = List.of("b1", "b2", "b3");
         Assertions.assertIterableEquals(expected, actual);
     }
@@ -69,7 +69,9 @@ public class HigherOrderFunctionsLearningTest {
     @Test
     public void testDistinct() {
         Stream<String> input = Stream.of("a1", "a2", "a3", "b1", "b2", "b3");
-        List<String> actual = null;
+        List<String> actual = input.map(s -> String.valueOf(s.charAt(0)))
+                .distinct()
+                .collect(Collectors.toList());
         List<String> expected = List.of("a", "b");
         Assertions.assertIterableEquals(expected, actual);
     }
@@ -80,9 +82,19 @@ public class HigherOrderFunctionsLearningTest {
     @Test
     public void testConcatEven() {
         Stream<String> input = Stream.of("a1", "a2", "a3", "b1", "b2", "b3");
-        String actual = null;
+        String actual = input.filter(this::checkEvenNumber)
+                .collect(Collectors.joining());
         String expected = "a2b2";
         Assertions.assertEquals(expected, actual);
+    }
+    public Boolean checkEvenNumber(String str){
+        String number = str.substring(str.length()-1);
+        for (int i=0; i < 10; i= i+2){
+            if (String.valueOf(i).equals(number)){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
