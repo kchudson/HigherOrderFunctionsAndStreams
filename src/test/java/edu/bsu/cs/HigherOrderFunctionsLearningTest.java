@@ -17,6 +17,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+//Kyler Hudson
+
 /**
  * Contains learning tests to demonstrate knowledge of higher-order functions
  * as used within
